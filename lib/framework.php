@@ -1,4 +1,7 @@
 <?php
+	// Error Handling
+	require_once("errorhandler.php");
+	
 	// Static
 	require_once("constants.php");
 	

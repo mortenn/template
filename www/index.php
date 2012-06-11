@@ -1,7 +1,7 @@
 <?php
-	require_once("../lib/includes.php");
-	require_once("../lib/homepage.php");
+	require_once("../lib/framework.php");
+	require_once("../lib/modules/homepage.php");
 	
-	$site = new HomePage("site");
-	echo $site;
+	$home = new HomePage();
+	echo $home;
 ?>
