@@ -1,14 +1,14 @@
 <?php
 	class Module
 	{
-		public function __construct($name, $data = Array())
+		public function __construct($template = null, $data = Array())
         {
             $this->data = $data;
 
-            if (file_exists(sprintf(HTML_DIR, $name)))
-                $this->file = sprintf(HTML_DIR, $name);
+            if (file_exists(sprintf(HTML_DIR, $template)))
+                $this->template = sprintf(HTML_DIR, $template);
             else
-                $this->file = null;
+                $this->template = null;
         }
 
         public function __get($key)
@@ -32,7 +32,7 @@
             ob_start();
 			
             extract($this->data);
-            require($this->file);
+            require($this->template);
 			
             return ob_get_clean();
         }
