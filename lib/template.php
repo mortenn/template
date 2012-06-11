@@ -1,14 +1,14 @@
 <?php
-	class Module
+	class Template
 	{
-		public function __construct($template = null, $data = Array())
+		public function __construct($name = null)
         {
-            $this->data = $data;
+            $this->data = array();
 
-            if (file_exists(sprintf(HTML_DIR, $template)))
-                $this->template = sprintf(HTML_DIR, $template);
+            if (file_exists(sprintf(HTML_DIR, $name)))
+                $this->file = sprintf(HTML_DIR, $name);
             else
-                $this->template = null;
+                $this->file = null;
         }
 
         public function __get($key)
@@ -27,17 +27,16 @@
         public function __toString()
         {
             if ($this->file === null)
-                return "Error loading page (Missing template)";
+                return sprintf('Error loading page (Missing template %s)', $this->name);
 
             ob_start();
-			
             extract($this->data);
-            require($this->template);
-			
+            require($this->file);
             return ob_get_clean();
         }
 
         protected $data;
         protected $file;
+		protected $name;
 	}
 ?>
